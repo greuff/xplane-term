@@ -21,7 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		D19D661A1D884EDB007A045F /* xplane-term.c in Sources */ = {isa = PBXBuildFile; fileRef = D19D66191D884EDB007A045F /* xplane-term.c */; };
+		D19D661A1D884EDB007A045F /* xplane-term.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D19D66191D884EDB007A045F /* xplane-term.cpp */; };
 		D19D661D1D884FB8007A045F /* XPLM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D19D661B1D884FB8007A045F /* XPLM.framework */; };
 		D19D661E1D884FB8007A045F /* XPWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D19D661C1D884FB8007A045F /* XPWidgets.framework */; };
 /* End PBXBuildFile section */
@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D19D66191D884EDB007A045F /* xplane-term.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "xplane-term.c"; path = "../../SourceCode/xplane-term.c"; sourceTree = "<group>"; };
+		D19D66191D884EDB007A045F /* xplane-term.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "xplane-term.cpp"; path = "../../SourceCode/xplane-term.cpp"; sourceTree = "<group>"; };
 		D19D661B1D884FB8007A045F /* XPLM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XPLM.framework; path = ../../SDK/Libraries/Mac/XPLM.framework; sourceTree = "<group>"; };
 		D19D661C1D884FB8007A045F /* XPWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XPWidgets.framework; path = ../../SDK/Libraries/Mac/XPWidgets.framework; sourceTree = "<group>"; };
 		D607B19909A556E400699BC3 /* xplane-term.xpl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "xplane-term.xpl"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,7 +59,7 @@
 		AC4E46B809C2E0B3006B7E1B /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D19D66191D884EDB007A045F /* xplane-term.c */,
+				D19D66191D884EDB007A045F /* xplane-term.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -132,7 +132,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D19D661A1D884EDB007A045F /* xplane-term.c in Sources */,
+				D19D661A1D884EDB007A045F /* xplane-term.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +179,7 @@
 					"APL=1",
 					"IBM=0",
 					"LIN=0",
+					"XPLM200=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(XPSDK_ROOT)/CHeaders/Widgets",
@@ -201,6 +202,7 @@
 					"APL=1",
 					"IBM=0",
 					"LIN=0",
+					"XPLM200=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(XPSDK_ROOT)/CHeaders/Widgets",
