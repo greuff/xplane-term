@@ -1,5 +1,6 @@
 /*
- * nav1 115.5
+ * 
+ nav1 115.5
  com1 122.65
  squawk 7000
  ap
@@ -9,8 +10,8 @@
  ap alt
  ap vs
  ap app
- ap flc
- hdg sync
+ ap flc = ap ias
+ hdg sync = hs
  hdg 334
  ias 140
  ias sync
@@ -18,9 +19,9 @@
  vs 500
  vs sync
  alt 9500
+ alt sync
  qnh 1012.3
  
- hs = heading sync
  dh (decision height)
  */
 
@@ -50,6 +51,7 @@ XPLMDataRef courseRef = NULL;
 XPLMDataRef barometerRef = NULL;
 XPLMDataRef autopilotStateRef = NULL;
 XPLMDataRef iasRef = NULL;
+XPLMDataRef dhRef = NULL;
 
 XPLMCommandRef flightDirCmdRef = NULL;
 XPLMCommandRef autopilotCmdRef = NULL;
@@ -102,25 +104,26 @@ PLUGIN_API int XPluginStart(
 	freqDataRefs["com2"] = XPLMFindDataRef("sim/cockpit/radios/com2_freq_hz");
 	freqDataRefs["adf1"] = XPLMFindDataRef("sim/cockpit/radios/adf1_freq_hz");
 	freqDataRefs["adf2"] = XPLMFindDataRef("sim/cockpit/radios/adf2_freq_hz");
-	transponderRef = XPLMFindDataRef("sim/cockpit/radios/transponder_code");
-	altitudeRef    = XPLMFindDataRef("sim/cockpit/autopilot/altitude");
-	verticalSpeedRef = XPLMFindDataRef("sim/cockpit/autopilot/vertical_velocity");
-	headingRef     = XPLMFindDataRef("sim/cockpit/autopilot/heading_mag");
-	courseRef      = XPLMFindDataRef("sim/cockpit/radios/nav1_obs_degm");
-	barometerRef   = XPLMFindDataRef("sim/cockpit/misc/barometer_setting");
-	autopilotStateRef = XPLMFindDataRef("sim/cockpit/autopilot/autopilot_state");
-	iasRef         = XPLMFindDataRef("sim/cockpit/autopilot/airspeed");
+	transponderRef       = XPLMFindDataRef("sim/cockpit/radios/transponder_code");
+	altitudeRef          = XPLMFindDataRef("sim/cockpit/autopilot/altitude");
+	verticalSpeedRef     = XPLMFindDataRef("sim/cockpit/autopilot/vertical_velocity");
+	headingRef           = XPLMFindDataRef("sim/cockpit/autopilot/heading_mag");
+	courseRef            = XPLMFindDataRef("sim/cockpit/radios/nav1_obs_degm");
+	barometerRef         = XPLMFindDataRef("sim/cockpit/misc/barometer_setting");
+	autopilotStateRef    = XPLMFindDataRef("sim/cockpit/autopilot/autopilot_state");
+	iasRef               = XPLMFindDataRef("sim/cockpit/autopilot/airspeed");
+	dhRef                = XPLMFindDataRef("sim/cockpit/misc/radio_altimeter_minimum");
 	
-	flightDirCmdRef  = XPLMFindCommand("sim/autopilot/fdir_toggle");
-	autopilotCmdRef = XPLMFindCommand("sim/autopilot/servos_toggle");
-	headingSyncCmdRef = XPLMFindCommand("sim/autopilot/heading_sync");
-	verticalSpeedCmdRef = XPLMFindCommand("sim/autopilot/vertical_speed");
-	approachCmdRef = XPLMFindCommand("sim/autopilot/approach");
-	flcCmdRef = XPLMFindCommand("sim/autopilot/level_change");
-	altSyncCmdRef = XPLMFindCommand("sim/autopilot/altitude_sync");
-	vsSyncCmdRef = XPLMFindCommand("sim/autopilot/vertical_speed_sync");
-	iasSyncCmdRef = XPLMFindCommand("sim/autopilot/airspeed_sync");
-	altArmCmdRef = XPLMFindCommand("sim/autopilot/altitude_arm");
+	flightDirCmdRef      = XPLMFindCommand("sim/autopilot/fdir_toggle");
+	autopilotCmdRef      = XPLMFindCommand("sim/autopilot/servos_toggle");
+	headingSyncCmdRef    = XPLMFindCommand("sim/autopilot/heading_sync");
+	verticalSpeedCmdRef  = XPLMFindCommand("sim/autopilot/vertical_speed");
+	approachCmdRef       = XPLMFindCommand("sim/autopilot/approach");
+	flcCmdRef            = XPLMFindCommand("sim/autopilot/level_change");
+	altSyncCmdRef        = XPLMFindCommand("sim/autopilot/altitude_sync");
+	vsSyncCmdRef         = XPLMFindCommand("sim/autopilot/vertical_speed_sync");
+	iasSyncCmdRef        = XPLMFindCommand("sim/autopilot/airspeed_sync");
+	altArmCmdRef         = XPLMFindCommand("sim/autopilot/altitude_arm");
 	
 	gHotKey = XPLMRegisterHotKey(XPLM_VK_TAB, xplm_DownFlag,
 								 "X-Plane Terminal",
@@ -190,15 +193,13 @@ PLUGIN_API void XPluginReceiveMessage(
 /// Called when the user pressed the global plugin hotkey.
 void MyHotKeyCallback(void *inRefcon)
 {
-//	XPLMSetDatai(gNav1DataRef, XPLMGetDatai(gNav1DataRef) + (long) 1000L);
-	
 	if(termWidget == NULL)
 	{
 		// Create the input widget
-		int x = 100;
-		int y = 100;
-		int width = 300;
-		int height = 50;
+		int x = 30;
+		int y = 70;
+		int width = 200;
+		int height = 40;
 		
 		termWidget = XPCreateWidget(x, y, x+width, y-height,
 					   1,	// Visible
@@ -211,7 +212,7 @@ void MyHotKeyCallback(void *inRefcon)
 		XPSetWidgetProperty(termWidget, xpProperty_MainWindowHasCloseBoxes, 1);
 		
 		// Add the text field
-		textInputField = XPCreateWidget(x+20, y-20, x+width-40, y-40, 1, "", 0, termWidget, xpWidgetClass_TextField);
+		textInputField = XPCreateWidget(x+20, y-15, x+width-20, y-35, 1, "", 0, termWidget, xpWidgetClass_TextField);
 		XPSetWidgetProperty(textInputField, xpProperty_TextFieldType, xpTextEntryField);
 		
 		// Register our widget handler
@@ -351,6 +352,10 @@ int	textFieldWidgetHandler(
 			{
 				XPLMSetDataf(altitudeRef, atof(outbuf + 4));
 			}
+			else if(strstr(outbuf, "dh ") == outbuf)
+			{
+				XPLMSetDataf(dhRef, atof(outbuf + 3));
+			}
 			else if(strcmp(outbuf, "vs sync") == 0)
 			{
 				XPLMCommandOnce(vsSyncCmdRef);
@@ -360,7 +365,7 @@ int	textFieldWidgetHandler(
 				float f = atof(outbuf + 3);
 				XPLMSetDataf(verticalSpeedRef, f);
 			}
-			else if(strcmp(outbuf, "hdg sync") == 0)
+			else if(strcmp(outbuf, "hdg sync") == 0 || strcmp(outbuf, "hs") == 0)
 			{
 				XPLMCommandOnce(headingSyncCmdRef);
 			}
@@ -410,7 +415,7 @@ int	textFieldWidgetHandler(
 			{
 				XPLMCommandOnce(approachCmdRef);
 			}
-			else if(strcmp(outbuf, "ap flc") == 0)
+			else if(strcmp(outbuf, "ap flc") == 0 || strcmp(outbuf, "ap ias") == 0)
 			{
 				XPLMCommandOnce(flcCmdRef);
 			}
