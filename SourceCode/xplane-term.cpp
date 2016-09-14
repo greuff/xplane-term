@@ -1,5 +1,27 @@
 /*
- *
+ * nav1 115.5
+ com1 122.65
+ squawk 7000
+ ap
+ fd
+ ap hdg
+ ap nav
+ ap alt
+ ap vs
+ ap app
+ ap flc
+ hdg sync
+ hdg 334
+ ias 140
+ ias sync
+ crs 120
+ vs 500
+ vs sync
+ alt 9500
+ qnh 1012.3
+ 
+ hs = heading sync
+ dh (decision height)
  */
 
 #include <stdio.h>
