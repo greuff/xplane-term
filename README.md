@@ -10,6 +10,7 @@ Press `Tab` to open and close the command line window. Enter a command and press
 
 * `nav1 115.5`: Tune NAV1 to 115.50 MHz. Also available for `nav2`.
 * `com1 122.65`: Tune COM1 to 122.65 MHz. Also available for `com2`.
+* `adf1 313`: Tune ADF1 to 313 kHz. Also available for `adf2`.
 * `squawk 7000`: Set squawk to 7000.
 * `ap`: Autopilot on/off toggle.
 * `fd`: Flight Director on/off toggle.
