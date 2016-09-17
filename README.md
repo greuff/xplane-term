@@ -2,6 +2,8 @@
 
 An X-Plane plugin that provides a shell-like command line interface.
 
+![Screenshot 1](/screenshot1.png?raw=true)
+
 ## Usage
 
 Press `Tab` to open and close the command line window. Enter a command and press enter, which will also close the window.
