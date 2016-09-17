@@ -50,4 +50,4 @@ Open the `Projects\Win\xplaneTerm.sln` file with Visual Studio and build. 32- an
 
 ## Installation
 
-Copy the product `xplane-term.xpl` file to `X-Plane 10\Resources\Plugins`.
+Copy the `Plugin\xplane-term` directory to the `Resources\Plugins` directory in your X-Plane 10 installation.
