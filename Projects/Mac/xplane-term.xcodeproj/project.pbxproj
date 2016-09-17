@@ -172,6 +172,7 @@
 		D607B16309A5563100699BC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				ENABLE_TESTABILITY = YES;
 				EXECUTABLE_EXTENSION = xpl;
 				FRAMEWORK_SEARCH_PATHS = "$(XPSDK_ROOT)/Libraries/Mac";
@@ -188,7 +189,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				VALID_ARCHS = "i386 x86_64";
+				VALID_ARCHS = "i386 ppc x86_64";
 				XPSDK_ROOT = ../../SDK;
 			};
 			name = Debug;
@@ -196,6 +197,7 @@
 		D607B16409A5563100699BC3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				EXECUTABLE_EXTENSION = xpl;
 				FRAMEWORK_SEARCH_PATHS = "$(XPSDK_ROOT)/Libraries/Mac";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -210,7 +212,7 @@
 					"$(HEADER_SEARCH_PATHS)",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
-				VALID_ARCHS = "i386 x86_64";
+				VALID_ARCHS = "i386 ppc x86_64";
 				XPSDK_ROOT = ../../SDK;
 			};
 			name = Release;
