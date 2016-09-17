@@ -1,28 +1,4 @@
 /*
- * 
- nav1 115.5
- com1 122.65
- squawk 7000
- ap
- fd
- ap hdg
- ap nav
- ap alt
- ap vs
- ap app
- ap flc = ap ias
- hdg sync = hs
- hdg 334
- ias 140
- ias sync
- crs 120
- vs 500
- vs sync
- alt 9500
- alt sync
- qnh 1012.3
- 
- dh (decision height)
  */
 
 #include <stdio.h>
@@ -68,13 +44,13 @@ void	MyHotKeyCallback(void *               inRefcon);
 int	termWidgetHandler(
 					  XPWidgetMessage			inMessage,
 					  XPWidgetID				inWidget,
-					  long					inParam1,
-					  long					inParam2);
+					  intptr_t					inParam1,
+					  intptr_t					inParam2);
 int	textFieldWidgetHandler(
 					  XPWidgetMessage			inMessage,
 					  XPWidgetID				inWidget,
-					  long					inParam1,
-					  long					inParam2);
+					  intptr_t					inParam1,
+					  intptr_t					inParam2);
 
 XPWidgetID	termWidget = NULL;
 XPWidgetID  textInputField = NULL;
@@ -199,7 +175,7 @@ void MyHotKeyCallback(void *inRefcon)
 		int x = 30;
 		int y = 70;
 		int width = 200;
-		int height = 40;
+		int height = 50;
 		
 		termWidget = XPCreateWidget(x, y, x+width, y-height,
 					   1,	// Visible
@@ -212,7 +188,7 @@ void MyHotKeyCallback(void *inRefcon)
 		XPSetWidgetProperty(termWidget, xpProperty_MainWindowHasCloseBoxes, 1);
 		
 		// Add the text field
-		textInputField = XPCreateWidget(x+20, y-15, x+width-20, y-35, 1, "", 0, termWidget, xpWidgetClass_TextField);
+		textInputField = XPCreateWidget(x+10, y-25, x+width-10, y-45, 1, "", 0, termWidget, xpWidgetClass_TextField);
 		XPSetWidgetProperty(textInputField, xpProperty_TextFieldType, xpTextEntryField);
 		
 		// Register our widget handler
@@ -244,8 +220,8 @@ void MyHotKeyCallback(void *inRefcon)
 int	termWidgetHandler(
 					   XPWidgetMessage			inMessage,
 					   XPWidgetID				inWidget,
-					   long					inParam1,
-					   long					inParam2)
+					   intptr_t					inParam1,
+					   intptr_t					inParam2)
 {
 	if (inMessage == xpMessage_CloseButtonPushed)
 	{
@@ -306,8 +282,8 @@ void processFrequencyCommand(const char *what, int channel, int frequency)
 int	textFieldWidgetHandler(
 					  XPWidgetMessage			inMessage,
 					  XPWidgetID				inWidget,
-					  long					inParam1,
-					  long					inParam2)
+					  intptr_t					inParam1,
+					  intptr_t					inParam2)
 {
 	if(inMessage == xpMsg_KeyPress && inWidget == textInputField && (KEY_FLAGS(inParam1) & xplm_DownFlag) == xplm_DownFlag )
 	{
