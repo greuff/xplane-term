@@ -46,7 +46,7 @@ Enter `Projects\Linux` and execute `make -f xplane-term.mk`.
 
 ### Windows
 
-TODO.
+Open the `Projects\Win\xplaneTerm.sln` file with Visual Studio and build. 32- and 64-bit-configurations are available.
 
 ## Installation
 
